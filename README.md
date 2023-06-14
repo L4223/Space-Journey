@@ -99,13 +99,14 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 ### 5.1 Blender Projektkonfiguration
 
 1. Installiere das NodeOSC Blender Plugin
+2. Öffne die Datei `Space_Journey.blend` im Ordner `models`
    - Lade das Plugin aus dem oben verlinkten Repository herunter
    - Speichere die ZIP-Datei in einem Ordner deiner Wahl
-2. Öffne das Blender Projekt "Space_Journey.blend"
-3. Navigiere zu `Edit > Preferences > Add-ons`
-4. Klicke auf `Install...` und wähle die ZIP-Datei aus
-5. Aktiviere das Plugin mit einem Klick auf das Kästchen links neben dem Plugin-Namen
-6. Auf der rechten Seite sollte nun ein neuer Reiter mit dem Namen "NodeOSC" erscheinen
+3. Öffne das Blender Projekt "Space_Journey.blend"
+4. Navigiere zu `Edit > Preferences > Add-ons`
+5. Klicke auf `Install...` und wähle die ZIP-Datei aus
+6. Aktiviere das Plugin mit einem Klick auf das Kästchen links neben dem Plugin-Namen
+7. Auf der rechten Seite sollte nun ein neuer Reiter mit dem Namen "NodeOSC" erscheinen
    ![Node OSC Plugin Einstellungen](/docs/images/NodeOSC_Reiter.png)
 
 ### 5.2 Blender-OSC Connection
@@ -164,8 +165,9 @@ Um die Ableton Session über OSC Signale von TouchDesigner steuern zu können, m
    - Die Ports müssen nicht verändert werden, solange du diese nicht bereits für ein anderes System/Projekt verwendest.
 
 4. **Starte das Ableton Live Projekt**
+   - Das Projekt befindet sich im Ordner `sounddesign`
    - Stelle sicher, dass die MIDI Remote Skripte installiert sind.
-   - Sollten die TDAbleton Devices nicht gefunden werden, kannst du den Pfad manuell hinzufügen.Anleitung von Ableton: [How to find and replace missing media files – Ableton](https://help.ableton.com/hc/en-us/articles/360000346779-How-to-find-and-replace-missing-media-files)
+   - Sollten die TDAbleton Devices nicht gefunden werden, kannst du den Pfad manuell hinzufügen. Anleitung von Ableton: [How to find and replace missing media files – Ableton](https://help.ableton.com/hc/en-us/articles/360000346779-How-to-find-and-replace-missing-media-files)
 5. **Wähle den Master Track des Ableton Projekts aus**
    - Nun siehst du ein **TDAMaster Device**.
    - Du solltest auf dem TDAMaster Device nun "connected" oder "disconnected" sehen können.
@@ -210,8 +212,10 @@ Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Op
 
 - Sämtliche Sounds wurden mit Ableton Instrumenten und Effekten erzeugt. Samples wurden nicht verwendet. Du kannst also einfach loslegen und mit dem Projekt experimentieren, solange du Ableton Live 10 aufwärts installiert hast.
 - Wenn du nicht an der TouchDesigner Steuerung interessiert bist, lösche einfach die TDAbleton Instrumente auf den einzelnen Spuren.
-- Damit man sich auf das Sounddesign konzentrieren kann, liegt jeweils ein **Scale MIDI-Effekt** auf den MIDI Spuren. So braucht man sich keine Gedanken um Harmonien machen. - Wenn du dies beibehalten möchtest, kopiere folgenden Effekt auf deine neue Synthesizer Spur:
+- Damit man sich auf das Sounddesign konzentrieren kann, liegt jeweils ein **Scale MIDI-Effekt** auf den MIDI Spuren. So braucht man sich keine Gedanken um Harmonien machen. - Wenn du dies beibehalten möchtest, kopiere folgenden Effekt auf deine neue Synthesizer Spur
+
   ![MIDI Scale Effect](/docs/images/MIDI_Scale_Effect.png)
+
 - Die einzelnen Sounddesign Patches werden nachfolgend kurz präsentiert, jedoch nicht tiefer erläutert. Es empfiehlt sich, die Ableton Instrumente zu öffnen und die Effekte zu deaktivieren, um zu sehen, wie die Sounds erzeugt wurden. Wenn du tiefer in die Materie einsteigen möchtest, starte mit dem Bassline Patch. Dieser besteht aus einem Wavetable Synthesizer und ein paar Effekten. Ein guter Einstiegspunkt ist die Filtersektion. Hier wird ein Filter mit zwei LFOs moduliert. Verändere die LFOs und höre dir an, wie sich der Sound verändert. Viel Spaß beim Experimentieren!
 
 #### Bassline
