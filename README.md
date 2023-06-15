@@ -1,7 +1,5 @@
 # Space Journey Dokumentation
 
-[TOC]
-
 ---
 
 ## Space Journey
@@ -52,7 +50,7 @@ _Bei Problemen siehe [Kinect Azure Dokumentation](https://learn.microsoft.com/en
 
 ### 4.1 Technische Vorraussetzungen
 
-- Nicht-Kommerzielle Version [Touch Designer](https://derivative.ca/download) Build 2022.32660
+- Nicht-Kommerzielle Version von [Touch Designer](https://derivative.ca/download) Build 2022.32660
   (Auflösung von 1280 x 1280px)
 - SSD empfohlen
 - Leistungsstarke Grafikkarte (Schwache Modelle beeinflussen Body Tracking und Latenz)
@@ -80,14 +78,15 @@ _Bei Fehlern den "Active" Schalter aus- und wieder einschalten für einen Reset_
 
 In diesem Projekt wurden Bodytracking Daten von der Linken und Rechten Hand (XYZ) sowie die Entfernung Z von der Wirbelsäule verwendet.
 
-1. Wenn die Kinnect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird. Siehe [Bodytracking Liste](https://hackmd.io/_uploads/HyweoPDPn.png) für die vollständige Liste.
+1. Wenn die Kinect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird. Siehe [Bodytracking Liste](https://hackmd.io/_uploads/HyweoPDPn.png) für die vollständige Liste.
 
 2. Mit einem **Select-Operator** können beliebige Body Tracking Informationen aus der Liste ausgewählt werden z.B. "hand_r:tx" für die X-Koordinaten der rechten Hand.
-   ![](https://hackmd.io/_uploads/SJfIbuvDn.png)
+
+   ![Übersicht der Kinect Konfiguration](https://hackmd.io/_uploads/SJfIbuvDn.png)
 
 _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 
-3. Per Drag-and-Drop kann jetzt eine Refernez zu einem der Ausgewählten Werte erstellt werden. Diese Referenz kann für z.B. einen Ableton-Operator verwendet werden. Siehe dafür _6.3 Erweiterung der Ableton Live Steuerung_
+3. Per Drag-and-Drop kann jetzt eine Referenz zu einem der ausgewählten Werte erstellt werden. Diese Referenz kann für z.B. einen Ableton-Operator verwendet werden. Siehe dafür [Punkt 6.3](#63-erweitern-der-ableton-live-steuerung)
 
 ## 5. Blender
 
@@ -107,7 +106,9 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 5. Klicke auf `Install...` und wähle die ZIP-Datei aus
 6. Aktiviere das Plugin mit einem Klick auf das Kästchen links neben dem Plugin-Namen
 7. Auf der rechten Seite sollte nun ein neuer Reiter mit dem Namen "NodeOSC" erscheinen
-   ![Node OSC Plugin Einstellungen](/docs/images/NodeOSC_Reiter.png)
+   ![Node OSC Plugin Einstellungen](./docs/images/NodeOSC_Reiter.png)
+8. Beim Öffnen des Projekts ist das **View-Port Shading** auf **Solid** eingestellt. Um die Materialien zu sehen, muss das Shading auf **Rendered** gestellt werden.
+   ![View-Port Shading](./docs/images/Viewport_Shading.png)
 
 ### 5.2 Blender-OSC Connection
 
@@ -117,7 +118,38 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 3. Klicke auf `Start OSC Server`
 4. Wenn die Verbindung erfolgreich war und die TouchDesigner Session mit der Kinect läuft, sollte die Kamera sich nun bewegen, wenn du dich vor der Kinect bewegst.
 
-5.3 Weitere Blender Objekte über OSC steuern
+### 5.3 Erläuterung der aktuellen OSC Adressen
+
+In dem Bild unter [Punkt 5.1](#51-blender-projektkonfiguration) sind die aktuellen OSC Adressen zu sehen.
+Die Adressen deuten auf die gleichnamigen TouchDesigner Channels hin.
+Die Channels werden von den OSC Out CHOPs in TouchDesigner gesendet.
+
+1. `/rotation` - Rotation der Planeten
+
+- Die Rotation der Planeten werden von einem LFO CHOP in TouchDesigner gesteuert. So rotieren die Planeten in einer konstanten Geschwindigkeit.
+
+2. `/body_x` - X-Koordinate der Szenenkamera
+
+- Die X-Koordinate der Szenenkamera wird von der X-Koordinate des Oberkörpers gesteuert. So bewegt sich die Kamera erwartungsgemäß mit dem Oberkörper.
+
+3. `/body_z` - Z-Koordinate der Szenenkamera
+
+- Die Z-Koordinate der Szenenkamera wird von der Z-Koordinate des Oberkörpers gesteuert. So kann man sich von den Objekten entfernen und näher an sie heran bewegen.
+
+4. `/hand_lz` - Z-Komponente der Quaternionrotation der Szenenkamera
+
+- Stellt einen Teil der Kamerasteuerung dar, die das Umsehen in der Szene ermöglicht.
+
+5. `/hand_rx` - X-Komponente der Quaternionrotation der Szenenkamera
+
+- Siehe 4.
+
+6. `/hand_ry` - Y-Komponente der Quaternionrotation der Szenenkamera
+
+- Siehe 4.
+  (Wichtig: Lässt man Teile der Quaternionrotation weg, kann es zu unerwarteten Ergebnissen kommen. Es ist mit der aktuellen Konfiguration sinnvoll, alle drei Komponenten gleichzeitig zu steuern.)
+
+### 5.4 Weitere Blender Objekte über OSC steuern
 
 - Um weitere Objekte in Blender über OSC steuern zu können, müssen diese zunächst mit dem NodeOSC Plugin verbunden werden.
 
@@ -144,7 +176,7 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 
 ### 6.1 TouchDesigner-Ableton Connection
 
-**Wenn du nur am Sounddesign interessiert bist, siehe Punkt 6.3**
+**Wenn du nur am Sounddesign interessiert bist, siehe [Punkt 6.4](#64-sounddesign)**
 Um die Ableton Session über OSC Signale von TouchDesigner steuern zu können, müssen beide Programme dafür konfiguriert werden.
 
 #### Annahmen für die folgende Anleitung
@@ -173,9 +205,12 @@ Um die Ableton Session über OSC Signale von TouchDesigner steuern zu können, m
    - Du solltest auf dem TDAMaster Device nun "connected" oder "disconnected" sehen können.
    - Wenn keine Verbindung hergestellt werden kann, siehe Troubleshooting von Derivative [TDAbleton - Troubleshooting](https://docs.derivative.ca/index.php?title=TDAbleton&oldid=17862#Troubleshooting)
 6. **Öffne wieder die TouchDesigner Session**
+
    - Wenn alles geklappt hat, zeigt die Ableton OSC Node nun **1 connected** an.
    - Um zu überprüfen, ob die bereits gemappten Ableton Parameter richtig erkannt werden, wähle einen der Parameter aus.
-   - ![Funktionierendes Beispiel zum Mapping](/docs/images/TDAbleton_comp.png)
+
+   ![Funktionierendes Beispiel zum Mapping](./docs/images/TDAbleton_comp.png)
+
    - Hier ist ein funktionierendes Beispiel zu sehen. Über das Dropdown Menü "Parameter" können sämtliche Parameter des Wavetable Devices ausgewählt werden.
    - Wenn du den Regler neben "Value Send" bewegst, sollte sich der ausgewählte Parameter in Ableton Live verändern.
 
@@ -196,7 +231,9 @@ Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Op
 3. **TouchDesigner Operator verbinden mit Parameter**
 
    - Um einen CHOP mit dem Parameter verbinden zu können, klicke das sternförmige Icon unten rechts an (siehe Bild)
-     ![Select CHOP](/docs/images/Select_CHOP.png)
+
+     ![Select CHOP](./docs/images/Select_CHOP.png)
+
    - Wenn du nun über den CHOP hoverst, sollte der Cursor sich zu einem "Dach" ändern.
    - Klicke auf den CHOP, wenn das Dach erscheint und halte die Taste gedrückt.
    - Ziehe die Maus auf den **Value Send** Reiter des Ableton Parameters, und lasse die Taste los.
@@ -214,7 +251,7 @@ Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Op
 - Wenn du nicht an der TouchDesigner Steuerung interessiert bist, lösche einfach die TDAbleton Instrumente auf den einzelnen Spuren.
 - Damit man sich auf das Sounddesign konzentrieren kann, liegt jeweils ein **Scale MIDI-Effekt** auf den MIDI Spuren. So braucht man sich keine Gedanken um Harmonien machen. - Wenn du dies beibehalten möchtest, kopiere folgenden Effekt auf deine neue Synthesizer Spur
 
-  ![MIDI Scale Effect](/docs/images/MIDI_Scale_Effect.png)
+  ![MIDI Scale Effect](./docs/images/MIDI_Scale_Effect.png)
 
 - Die einzelnen Sounddesign Patches werden nachfolgend kurz präsentiert, jedoch nicht tiefer erläutert. Es empfiehlt sich, die Ableton Instrumente zu öffnen und die Effekte zu deaktivieren, um zu sehen, wie die Sounds erzeugt wurden. Wenn du tiefer in die Materie einsteigen möchtest, starte mit dem Bassline Patch. Dieser besteht aus einem Wavetable Synthesizer und ein paar Effekten. Ein guter Einstiegspunkt ist die Filtersektion. Hier wird ein Filter mit zwei LFOs moduliert. Verändere die LFOs und höre dir an, wie sich der Sound verändert. Viel Spaß beim Experimentieren!
 
