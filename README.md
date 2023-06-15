@@ -78,11 +78,13 @@ _Bei Fehlern den "Active" Schalter aus- und wieder einschalten für einen Reset_
 
 In diesem Projekt wurden Bodytracking Daten von der Linken und Rechten Hand (XYZ) sowie die Entfernung Z von der Wirbelsäule verwendet.
 
-1. Wenn die Kinect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird. Siehe [Bodytracking Liste](https://hackmd.io/_uploads/HyweoPDPn.png) für die vollständige Liste.
+1. Wenn die Kinect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird. 
+   
+   ![Bodytracking Liste](./docs/images/Bodytracking_Liste.png)
 
 2. Mit einem **Select-Operator** können beliebige Body Tracking Informationen aus der Liste ausgewählt werden z.B. "hand_r:tx" für die X-Koordinaten der rechten Hand.
 
-   ![Übersicht der Kinect Konfiguration](https://hackmd.io/_uploads/SJfIbuvDn.png)
+   ![Übersicht der Kinect Konfiguration](./docs/images/Bodytracking_Selection.png)
 
 _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 
