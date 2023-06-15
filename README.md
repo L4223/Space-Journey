@@ -1,8 +1,15 @@
-# Space Journey Dokumentation
+# Space Journey - Dokumentation
+
+**Creative Technologies - Fachhochschule Kiel**  
+**Sommersemester 2023**  
+**Dozenten: Prof. Dr. Steffen Prochnow, Prof. Dr. Robert Manzke**
+
+Von: _David Credo,Lasse Knodt, Tara Obersteller_
 
 ---
-
-## Space Journey
+[TOC]
+---
+## Projektbeschreibung
 
 Space Journey ist eine interaktive 3D-Installation, die im Rahmen von Creative Technologies an der Fachhochschule Kiel erstellt wurde. Der Nutzer kann mit seinem Körper eine Kamera durch das Weltall steuern und wird dabei dynamisch von Musik unterstützt.
 
@@ -78,8 +85,8 @@ _Bei Fehlern den "Active" Schalter aus- und wieder einschalten für einen Reset_
 
 In diesem Projekt wurden Bodytracking Daten von der Linken und Rechten Hand (XYZ) sowie die Entfernung Z von der Wirbelsäule verwendet.
 
-1. Wenn die Kinect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird. 
-   
+1. Wenn die Kinect erfolgreich verbunden wurde, sollte im "TrackingInfo" Operator Daten angezeigt werden. Es gibt eine Liste von 100 Körperteilen deren Position getracked wird.
+
    ![Bodytracking Liste](./docs/images/Bodytracking_Liste.png)
 
 2. Mit einem **Select-Operator** können beliebige Body Tracking Informationen aus der Liste ausgewählt werden z.B. "hand_r:tx" für die X-Koordinaten der rechten Hand.
@@ -108,9 +115,16 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 5. Klicke auf `Install...` und wähle die ZIP-Datei aus
 6. Aktiviere das Plugin mit einem Klick auf das Kästchen links neben dem Plugin-Namen
 7. Auf der rechten Seite sollte nun ein neuer Reiter mit dem Namen "NodeOSC" erscheinen
+
    ![Node OSC Plugin Einstellungen](./docs/images/NodeOSC_Reiter.png)
+
+_Ansicht des NodeOSC Reiters_
+
 8. Beim Öffnen des Projekts ist das **View-Port Shading** auf **Solid** eingestellt. Um die Materialien zu sehen, muss das Shading auf **Rendered** gestellt werden.
+
    ![View-Port Shading](./docs/images/Viewport_Shading.png)
+
+_Hinweis auf das View-Port Shading_
 
 ### 5.2 Blender-OSC Connection
 
@@ -213,8 +227,10 @@ Um die Ableton Session über OSC Signale von TouchDesigner steuern zu können, m
 
    ![Funktionierendes Beispiel zum Mapping](./docs/images/TDAbleton_comp.png)
 
-   - Hier ist ein funktionierendes Beispiel zu sehen. Über das Dropdown Menü "Parameter" können sämtliche Parameter des Wavetable Devices ausgewählt werden.
-   - Wenn du den Regler neben "Value Send" bewegst, sollte sich der ausgewählte Parameter in Ableton Live verändern.
+_Exemplarisch wird hier die Filterfrequenz eines Wavetable Synthesizers gesteuert._
+
+- Hier ist ein funktionierendes Beispiel zu sehen. Über das Dropdown Menü "Parameter" können sämtliche Parameter des Wavetable Devices ausgewählt werden.
+- Wenn du den Regler neben "Value Send" bewegst, sollte sich der ausgewählte Parameter in Ableton Live verändern.
 
 ### 6.3 Erweitern der Ableton Live Steuerung
 
@@ -232,20 +248,22 @@ Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Op
    - Wähle im Menü des Ableton Parameters (siehe voriges Beispiel) den Track des Synthesizers, das zu steuernde Device, und den Parameter (z.B. Filter 1 Freq) aus.
 3. **TouchDesigner Operator verbinden mit Parameter**
 
-   - Um einen CHOP mit dem Parameter verbinden zu können, klicke das sternförmige Icon unten rechts an (siehe Bild)
+   - Um einen CHOP mit dem Parameter verbinden zu können, klicke das sternförmige Icon unten rechts an
 
      ![Select CHOP](./docs/images/Select_CHOP.png)
 
-   - Wenn du nun über den CHOP hoverst, sollte der Cursor sich zu einem "Dach" ändern.
-   - Klicke auf den CHOP, wenn das Dach erscheint und halte die Taste gedrückt.
-   - Ziehe die Maus auf den **Value Send** Reiter des Ableton Parameters, und lasse die Taste los.
-   - Wähle in dem erscheinenden Menü **CHOP Reference**
-   - **Fertig!** Der Ableton Parameter wird nun von dem CHOP gesteuert.
+_Sternförmiges Icon unten rechts sichtbar_
 
-     4.**Bemerkungen**
+- Wenn du nun über den CHOP hoverst, sollte der Cursor sich zu einem "Dach" ändern.
+- Klicke auf den CHOP, wenn das Dach erscheint und halte die Taste gedrückt.
+- Ziehe die Maus auf den **Value Send** Reiter des Ableton Parameters, und lasse die Taste los.
+- Wähle in dem erscheinenden Menü **CHOP Reference**
+- **Fertig!** Der Ableton Parameter wird nun von dem CHOP gesteuert.
 
-   - Um brauchbare Ergebnisse zu erzielen, müssen die Werte in TouchDesigner meistens erst normalisiert und auf einen passenden Wertebereich angepasst werden. Beispielsweise die Positionsdaten, die die Kinect liefert. Im Projekt sind einige solcher Umformungen von uns vorgenommen worden, lass dich hier gern inspirieren!
-   - Wenn ein neuer Track in Ableton hinzugefügt wird, stelle sicher, dass du diesen umbenennst. Ableton fügt beim Erstellen eines Tracks eine Raute vor dem Namen ein. Dies kann zu Problemen mit TouchDesigner führen!
+  4.**Bemerkungen**
+
+- Um brauchbare Ergebnisse zu erzielen, müssen die Werte in TouchDesigner meistens erst normalisiert und auf einen passenden Wertebereich angepasst werden. Beispielsweise die Positionsdaten, die die Kinect liefert. Im Projekt sind einige solcher Umformungen von uns vorgenommen worden, lass dich hier gern inspirieren!
+- Wenn ein neuer Track in Ableton hinzugefügt wird, stelle sicher, dass du diesen umbenennst. Ableton fügt beim Erstellen eines Tracks eine Raute vor dem Namen ein. Dies kann zu Problemen mit TouchDesigner führen!
 
 ### 6.4 Sounddesign
 
@@ -254,6 +272,8 @@ Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Op
 - Damit man sich auf das Sounddesign konzentrieren kann, liegt jeweils ein **Scale MIDI-Effekt** auf den MIDI Spuren. So braucht man sich keine Gedanken um Harmonien machen. - Wenn du dies beibehalten möchtest, kopiere folgenden Effekt auf deine neue Synthesizer Spur
 
   ![MIDI Scale Effect](./docs/images/MIDI_Scale_Effect.png)
+
+_Ansicht des MIDI Scale Effekts. Zu finden auf allen Synthesizer Spuren_
 
 - Die einzelnen Sounddesign Patches werden nachfolgend kurz präsentiert, jedoch nicht tiefer erläutert. Es empfiehlt sich, die Ableton Instrumente zu öffnen und die Effekte zu deaktivieren, um zu sehen, wie die Sounds erzeugt wurden. Wenn du tiefer in die Materie einsteigen möchtest, starte mit dem Bassline Patch. Dieser besteht aus einem Wavetable Synthesizer und ein paar Effekten. Ein guter Einstiegspunkt ist die Filtersektion. Hier wird ein Filter mit zwei LFOs moduliert. Verändere die LFOs und höre dir an, wie sich der Sound verändert. Viel Spaß beim Experimentieren!
 
