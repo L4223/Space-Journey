@@ -7,22 +7,50 @@
 Von: _David Credo,Lasse Knodt, Tara Obersteller_
 
 ---
-[TOC]
+## Contents
+
+- [Projektbeschreibung](#Projektbeschreibung)
+- [2. Einleitung](#Einleitung)
+  - [2.1 Vorraussetzungen](#Vorraussetzungen)
+  - [2.2 Projekt herunterladen](#Projektherunterladen)
+- [3. Kinect Azure](#KinectAzure)
+  - [3.1 Installation](#Installation)
+- [4. Touch Designer](#TouchDesigner)
+  - [4.1 Technische Vorraussetzungen](#TechnischeVorraussetzungen)
+  - [4.1 Projektkonfiguration](#Projektkonfiguration)
+  - [4.2 Body Tracking](#BodyTracking)
+- [5. Blender](#Blender)
+  - [5.1 Blender Projektkonfiguration](#BlenderProjektkonfiguration)
+  - [5.2 Blender-OSC Connection](#Blender-OSCConnection)
+  - [5.3 Erläuterung der aktuellen OSC Adressen](#ErluterungderaktuellenOSCAdressen)
+  - [5.4 Weitere Blender Objekte über OSC steuern](#WeitereBlenderObjekteberOSCsteuern)
+- [6. Ableton Live Setup](#AbletonLiveSetup)
+  - [6.1 TouchDesigner-Ableton Connection](#TouchDesigner-AbletonConnection)
+    - [Annahmen für die folgende Anleitung](#AnnahmenfrdiefolgendeAnleitung)
+  - [6.2 Anleitung](#Anleitung)
+  - [6.3 Erweitern der Ableton Live Steuerung](#ErweiternderAbletonLiveSteuerung)
+    - [TouchDesigner -> Ableton Workflow](#TouchDesigner-AbletonWorkflow)
+  - [6.4 Sounddesign](#Sounddesign)
+    - [Bassline](#Bassline)
+    - [Arpeggio](#Arpeggio)
+    - [Pad](#Pad)
+    - [SFX](#SFX)
+- [7. Probleme](#Probleme)
 
 ---
-## Projektbeschreibung
+## <a name='Projektbeschreibung'></a>Projektbeschreibung
 
 Space Journey ist eine interaktive 3D-Installation, die im Rahmen von Creative Technologies an der Fachhochschule Kiel erstellt wurde. Der Nutzer kann mit seinem Körper eine Kamera durch das Weltall steuern und wird dabei dynamisch von Musik unterstützt.
 
 Das Projekt ist eine Kombination aus Touch Designer, Blender und Ableton Live verbunden mit OSC. In Touch Designer werden Body-Tracking Daten der Kinect Azure gesammelt und an Blender bzw. Ableton Live versendet. Diese reagieren dann mit z.B. einer Änderung der Kameraperspektive oder eines Sound-Filter Cutoffs.
 
-## 2. Einleitung
+## <a name='Einleitung'></a>2. Einleitung
 
 Nachfolgend wird die Konfiguration der einzelnen Programme, die für das Starten des Projekts benötigt werden, beschrieben.
 Die Programme können auf einem Rechner oder auf mehreren Rechnern ausgeführt werden. Wenn ein einzelner Rechner verwendet wird, muss dieser eine entsprechend leistungsstarke Hardware besitzen.
 In jedem Fall muss mindestens ein Windows Rechner verwendet werden, da die Kinect Azure nur unter Windows funktioniert. Ableton Live und Blender können auch auf MacOS ausgeführt werden. (Blender sollte nach Möglichkeit auf einem Windows Rechner ausgeführt werden, da die Performance dort besser ist).
 
-### 2.1 Vorraussetzungen
+### <a name='Vorraussetzungen'></a>2.1 Vorraussetzungen
 
 Um das Projekt starten zu können werden folgende Programme benötigt:
 
@@ -33,7 +61,7 @@ Um das Projekt starten zu können werden folgende Programme benötigt:
 
 _Die genaue Installation und detaillierte technische Anforderungen folgen im jeweiligen Abschnitt._
 
-### 2.2 Projekt herunterladen
+### <a name='Projektherunterladen'></a>2.2 Projekt herunterladen
 
 Das gesamte Projekt ist auf dem GitLab der FH-Kiel bereitgestellt. Zum herunterladen, nutze folgenden Befehl in deiner Git-Bash:
 
@@ -43,9 +71,9 @@ git clone https://gitlab.iue.fh-kiel.de/mediaip-works/2023ss-space-journey
 
 **Alternative:** Lade die Dateien [hier](https://gitlab.iue.fh-kiel.de/mediaip-works/2023ss-space-journey) herunter.
 
-## 3. Kinect Azure
+## <a name='KinectAzure'></a>3. Kinect Azure
 
-### 3.1 Installation
+### <a name='Installation'></a>3.1 Installation
 
 1.  Kinect mit Stromkabel verbinden
 2.  Kinect mit USB 3.0 Port am Computer verbinden
@@ -54,9 +82,9 @@ git clone https://gitlab.iue.fh-kiel.de/mediaip-works/2023ss-space-journey
 
 _Bei Problemen siehe [Kinect Azure Dokumentation](https://learn.microsoft.com/en-us/azure/kinect-dk/)_
 
-## 4. Touch Designer
+## <a name='TouchDesigner'></a>4. Touch Designer
 
-### 4.1 Technische Vorraussetzungen
+### <a name='TechnischeVorraussetzungen'></a>4.1 Technische Vorraussetzungen
 
 - Nicht-Kommerzielle Version von [Touch Designer](https://derivative.ca/download) Build 2022.32660
   (Auflösung von 1280 x 1280px)
@@ -74,7 +102,7 @@ _Bei Problemen siehe [Kinect Azure Dokumentation](https://learn.microsoft.com/en
 - macOS 10.14 oder neuer
 - Mac / MacBook 2015 oder neuer
 
-### 4.1 Projektkonfiguration
+### <a name='Projektkonfiguration'></a>4.1 Projektkonfiguration
 
 1.  Wenn das Projekt erfolgreich von Git-Lab geklont bzw. heruntergeladen wurde, öffne in den Projektdateien die Datei "**TD_Space_Journey.toe**".
 2.  Wähle im **"Kinect Azure" Operator** (Links) unter "Sensor" die Kinect Azure aus.
@@ -82,7 +110,7 @@ _Bei Problemen siehe [Kinect Azure Dokumentation](https://learn.microsoft.com/en
 
 _Bei Fehlern den "Active" Schalter aus- und wieder einschalten für einen Reset_
 
-### 4.2 Body Tracking
+### <a name='BodyTracking'></a>4.2 Body Tracking
 
 In diesem Projekt wurden Bodytracking Daten von der Linken und Rechten Hand (XYZ) sowie die Entfernung Z von der Wirbelsäule verwendet.
 
@@ -98,14 +126,14 @@ _Die Namen wurde im Select-Operator von "hand_r:tx" auf "Rechts_x" umbenannt._
 
 3. Per Drag-and-Drop kann jetzt eine Referenz zu einem der ausgewählten Werte erstellt werden. Diese Referenz kann für z.B. einen Ableton-Operator verwendet werden. Siehe dafür [Punkt 6.3](#63-erweitern-der-ableton-live-steuerung)
 
-## 5. Blender
+## <a name='Blender'></a>5. Blender
 
 **Technische Vorraussetzungen**
 
 - Mindestens Blender 2.93
 - NodeOSC Blender Plugin [Repository des Plugins](https://github.com/maybites/blender.NodeOSC)
 
-### 5.1 Blender Projektkonfiguration
+### <a name='BlenderProjektkonfiguration'></a>5.1 Blender Projektkonfiguration
 
 1. Installiere das NodeOSC Blender Plugin
 2. Öffne die Datei `Space_Journey.blend` im Ordner `models`
@@ -127,7 +155,7 @@ _Ansicht des NodeOSC Reiters_
 
 _Hinweis auf das View-Port Shading_
 
-### 5.2 Blender-OSC Connection
+### <a name='Blender-OSCConnection'></a>5.2 Blender-OSC Connection
 
 1. Wenn das Projekt auf dem selben Rechner wie TouchDesigner läuft, muss die IP-Adresse nicht verändert werden
    - Wenn das Projekt auf einem anderen Rechner läuft, muss die IP-Adresse des Rechners, auf dem TouchDesigner läuft, eingetragen werden
@@ -135,7 +163,7 @@ _Hinweis auf das View-Port Shading_
 3. Klicke auf `Start OSC Server`
 4. Wenn die Verbindung erfolgreich war und die TouchDesigner Session mit der Kinect läuft, sollte die Kamera sich nun bewegen, wenn du dich vor der Kinect bewegst.
 
-### 5.3 Erläuterung der aktuellen OSC Adressen
+### <a name='ErluterungderaktuellenOSCAdressen'></a>5.3 Erläuterung der aktuellen OSC Adressen
 
 In dem Bild unter [Punkt 5.1](#51-blender-projektkonfiguration) sind die aktuellen OSC Adressen zu sehen.
 Die Adressen deuten auf die gleichnamigen TouchDesigner Channels hin.
@@ -166,7 +194,7 @@ Die Channels werden von den OSC Out CHOPs in TouchDesigner gesendet.
 - Siehe 4.
   (Wichtig: Lässt man Teile der Quaternionrotation weg, kann es zu unerwarteten Ergebnissen kommen. Es ist mit der aktuellen Konfiguration sinnvoll, alle drei Komponenten gleichzeitig zu steuern.)
 
-### 5.4 Weitere Blender Objekte über OSC steuern
+### <a name='WeitereBlenderObjekteberOSCsteuern'></a>5.4 Weitere Blender Objekte über OSC steuern
 
 - Um weitere Objekte in Blender über OSC steuern zu können, müssen diese zunächst mit dem NodeOSC Plugin verbunden werden.
 
@@ -185,23 +213,23 @@ Die Channels werden von den OSC Out CHOPs in TouchDesigner gesendet.
 5. Vergiss nicht den `Start OSC Server` Button zu drücken, um die Verbindung zu starten
 6. Rinse and repeat für alle weiteren Objekte, die du steuern möchtest!
 
-## 6. Ableton Live Setup
+## <a name='AbletonLiveSetup'></a>6. Ableton Live Setup
 
 **Technische Vorraussetzungen**
 
 - Ableton Live 10+ (Intro, Standard, Suite)
 
-### 6.1 TouchDesigner-Ableton Connection
+### <a name='TouchDesigner-AbletonConnection'></a>6.1 TouchDesigner-Ableton Connection
 
 **Wenn du nur am Sounddesign interessiert bist, siehe [Punkt 6.4](#64-sounddesign)**
 Um die Ableton Session über OSC Signale von TouchDesigner steuern zu können, müssen beide Programme dafür konfiguriert werden.
 
-#### Annahmen für die folgende Anleitung
+#### <a name='AnnahmenfrdiefolgendeAnleitung'></a>Annahmen für die folgende Anleitung
 
 1. Die Ableton Session befindet sich nicht auf dem gleichen Rechner, wie die TouchDesigner Session.
 2. Die MIDI-Remote Skripte für TouchDesigner sind installiert. (Hierfür gibt es eine [Anleitung von Derivative](https://docs.derivative.ca/index.php?title=TDAbleton&oldid=17862#Getting_Started) unter dem Abschnitt **Install the latest TDAbleton System**)
 
-### 6.2 Anleitung
+### <a name='Anleitung'></a>6.2 Anleitung
 
 1. Stelle sicher, dass beide Rechner im selben Netzwerk sind.
    - **Wichtig:** Im eduroam Netz ist das Setup nicht möglich, da die Kommunikation zwischen den beiden Rechnern unterbunden wird.
@@ -233,11 +261,11 @@ _Exemplarisch wird hier die Filterfrequenz eines Wavetable Synthesizers gesteuer
 - Hier ist ein funktionierendes Beispiel zu sehen. Über das Dropdown Menü "Parameter" können sämtliche Parameter des Wavetable Devices ausgewählt werden.
 - Wenn du den Regler neben "Value Send" bewegst, sollte sich der ausgewählte Parameter in Ableton Live verändern.
 
-### 6.3 Erweitern der Ableton Live Steuerung
+### <a name='ErweiternderAbletonLiveSteuerung'></a>6.3 Erweitern der Ableton Live Steuerung
 
 Wenn du weitere Parameter des Ableton Live Projekts durch einen TouchDesigner Operator steuern möchtest, lies die folgende Kurzanleitung.
 
-#### TouchDesigner -> Ableton Workflow
+#### <a name='TouchDesigner-AbletonWorkflow'></a>TouchDesigner -> Ableton Workflow
 
 1. **Wähle einen TouchDesigner Operator aus**
 
@@ -266,7 +294,7 @@ _Sternförmiges Icon unten rechts sichtbar_
 - Um brauchbare Ergebnisse zu erzielen, müssen die Werte in TouchDesigner meistens erst normalisiert und auf einen passenden Wertebereich angepasst werden. Beispielsweise die Positionsdaten, die die Kinect liefert. Im Projekt sind einige solcher Umformungen von uns vorgenommen worden, lass dich hier gern inspirieren!
 - Wenn ein neuer Track in Ableton hinzugefügt wird, stelle sicher, dass du diesen umbenennst. Ableton fügt beim Erstellen eines Tracks eine Raute vor dem Namen ein. Dies kann zu Problemen mit TouchDesigner führen!
 
-### 6.4 Sounddesign
+### <a name='Sounddesign'></a>6.4 Sounddesign
 
 - Sämtliche Sounds wurden mit Ableton Instrumenten und Effekten erzeugt. Samples wurden nicht verwendet. Du kannst also einfach loslegen und mit dem Projekt experimentieren, solange du Ableton Live 10 aufwärts installiert hast.
 - Wenn du nicht an der TouchDesigner Steuerung interessiert bist, lösche einfach die TDAbleton Instrumente auf den einzelnen Spuren.
@@ -278,21 +306,21 @@ _Ansicht des MIDI Scale Effekts. Zu finden auf allen Synthesizer Spuren_
 
 - Die einzelnen Sounddesign Patches werden nachfolgend kurz präsentiert, jedoch nicht tiefer erläutert. Es empfiehlt sich, die Ableton Instrumente zu öffnen und die Effekte zu deaktivieren, um zu sehen, wie die Sounds erzeugt wurden. Wenn du tiefer in die Materie einsteigen möchtest, starte mit dem Bassline Patch. Dieser besteht aus einem Wavetable Synthesizer und ein paar Effekten. Ein guter Einstiegspunkt ist die Filtersektion. Hier wird ein Filter mit zwei LFOs moduliert. Verändere die LFOs und höre dir an, wie sich der Sound verändert. Viel Spaß beim Experimentieren!
 
-#### Bassline
+#### <a name='Bassline'></a>Bassline
 
 - Der Bassline Sound ist ein Wavetable Synthesizer, der mit einem Filter und zwei LFOs moduliert wird.
 - Die Position der Waveform wird ebenfalls von einem LFO moduliert.
 - Das Cutoff des Filters wird von der Tiefenposition des Oberkörpers, die von der Kinect erfasst wird, gesteuert. (Näher an der Kinect = höherer Cutoff)
 - Es wird ein FM Effekt verwendet, der von der Y-Position der linken Hand gesteuert wird. (Höher = stärkere FM-Modulation)
 
-#### Arpeggio
+#### <a name='Arpeggio'></a>Arpeggio
 
 - Der Arpeggio Sound wird von einem Operator erzeugt.
 - Eine Sinuswelle wird von einer Sägezahnwelle und einer weiteren Sinuswelle in unterschiedlichen Oktaven moduliert.
 - Das Cuttoff des Filters wird von der Tiefenposition des Oberkörpers, die von der Kinect erfasst wird, gesteuert. (Näher an der Kinect = höherer Cutoff)
 - Eine Hüllkurve mit schnellem Attack und Decay wird auf das Filter gelegt, um den Sound perkussiv zu gestalten.
 
-#### Pad
+#### <a name='Pad'></a>Pad
 
 - Der Pad Sound besteht aus mehreren Layern.
 - Zwei Wavetable Synthesizer und ein Physical Modelling Synthesizer (Collision) wurden verwendet.
@@ -303,14 +331,14 @@ _Ansicht des MIDI Scale Effekts. Zu finden auf allen Synthesizer Spuren_
 - Der Collision Synthesizer besitzt Einstellungsmöglichkeiten für interessante Noise Texturen und Resonanzen. Der Noise Amount wird ebenfalls von der Tiefenposition des Oberkörpers gesteuert. So entsteht ein sehr dichtes Klangbild, das sich mit der Position des "Spielers" verändert.
 - Gemeinsam erzeugen die Synthesizer einen sehr dichten, warmen Sound, der als klangliches Fundament für die anderen Sounds dient und mit der Position des "Spielers" interagiert.
 
-#### SFX
+#### <a name='SFX'></a>SFX
 
 - Der perkussive SFX Sound wird von einem Operator erzeugt.
 - Eine Sinuswelle wird von einer weiteren Sinuswelle sowie einer White Noise Textur, jeweils in unterschiedlichen Oktaven, moduliert.
 - Ein Tiefpassfilter wird von einem Sample&Hold LFO im 1/4 Takt moduliert. So entsteht ein rhythmischer Effekt. Der Sample&Hold LFO steuert ebenfalls die Oszillatoren, um ständig neue Klänge zu erzeugen.
 - Mit Annäherung an die Kinect wird die Lautstärke des SFX erhöht. (Näher an der Kinect = lauter)
 
-## 7. Probleme
+## <a name='Probleme'></a>7. Probleme
 
 Im Laufe des Projekts sind wir auf einige Probleme gestoßen, die wir hier kurz auflisten möchten.
 
