@@ -4,7 +4,7 @@
 **Sommersemester 2023**  
 **Dozenten: Prof. Dr. Steffen Prochnow, Prof. Dr. Robert Manzke**
 
-Von: _David Credo,Lasse Knodt, Tara Obersteller_
+Von: _David Credo, Lasse Knodt, Tara Obersteller_
 
 ---
 ## Contents
